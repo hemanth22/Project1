@@ -1,0 +1,36 @@
+GET index-*/_search
+{
+    "from" : 0, "size" : 100,
+
+    "query": {
+        "bool": {
+            "must": [
+                {
+                    "match_all": {}
+                },
+                {
+                    "range": {
+                        "@timestamp": {
+                            "gte": "now/d",
+                            "lte": "now",
+                            "format": "epoch_millis"
+                        }
+                    }
+                }
+          ],
+          "should": [
+                {"match_phrase": {"field.keyword": {"query": "value"}}},
+                {"match_phrase": {"field.keyword": {"query": "value"}}},
+               {"match_phrase": {"field.keyword": {"query": "value"}}}, 
+               {"match_phrase": {"field.keyword": {"query": "value"}}},
+               {"match_phrase": {"field.keyword": {"query": "value"}}},
+               {"match_phrase": {"field.keyword": {"query": "value"}}},
+               {"match_phrase": {"field.keyword": {"query": "value"}}},
+               {"match_phrase": {"field.keyword": {"query": "value"}}}
+          ],
+          "minimum_should_match" : 1,
+          "boost" : 1.0
+        }
+    },
+  "_source": ["field","field","field"]
+}
